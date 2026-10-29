@@ -1,0 +1,410 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   EMBER & BLOOM — Design System Token Architecture
+   Three-tier: Primitive → Semantic → Component
+   ═══════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Primitive: Warm Stone Scale ── */
+  --color-stone-950: #0c0a09;
+  --color-stone-900: #1c1917;
+  --color-stone-850: #231f1c;
+  --color-stone-800: #292524;
+  --color-stone-700: #44403c;
+  --color-stone-600: #57534e;
+  --color-stone-500: #78716c;
+  --color-stone-400: #a8a29e;
+  --color-stone-300: #d6d3d1;
+  --color-stone-200: #e7e5e3;
+  --color-stone-100: #f5f5f4;
+  --color-stone-50: #fafaf9;
+
+  /* ── Primitive: Amber Accent Scale ── */
+  --color-amber-950: #451a03;
+  --color-amber-900: #78350f;
+  --color-amber-800: #92400e;
+  --color-amber-700: #b45309;
+  --color-amber-600: #d97706;
+  --color-amber-500: #f59e0b;
+  --color-amber-400: #fbbf24;
+  --color-amber-300: #fcd34d;
+  --color-amber-200: #fde68a;
+  --color-amber-100: #fef3c7;
+  --color-amber-50: #fffbeb;
+
+  /* ── Typography: Typeface Selection ── */
+  /* Formula 2: Categorical Contrast - Serif Display + Sans Body */
+  --font-serif: 'Georgia', 'Cambria', 'Times New Roman', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  /* ── Typography: Modular Scale (Perfect Fourth 1.333) ── */
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.25rem;      /* 20px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 1.875rem;    /* 30px */
+  --text-4xl: 2.25rem;     /* 36px */
+  --text-5xl: 3rem;        /* 48px */
+  --text-6xl: 3.75rem;     /* 60px */
+  --text-7xl: 4.5rem;      /* 72px */
+
+  /* ── Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* ── Breakpoints ── */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+}
+
+/* ── Semantic Tokens: Dark Mode Only ── */
+:root {
+  --bg-canvas: #0c0a09;
+  --bg-surface: #1c1917;
+  --bg-surface-raised: #292524;
+  --bg-surface-hover: #44403c;
+  --bg-muted: #1c1917;
+
+  --text-primary: #fafaf9;
+  --text-secondary: #a8a29e;
+  --text-muted: #57534e;
+  --text-inverse: #1c1917;
+
+  --border-subtle: rgba(250, 250, 249, 0.06);
+  --border-default: rgba(250, 250, 249, 0.1);
+  --border-strong: rgba(250, 250, 249, 0.18);
+
+  --accent: #fbbf24;
+  --accent-hover: #fcd34d;
+  --accent-contrast: #1c1917;
+  --accent-muted: rgba(251, 191, 36, 0.1);
+
+  --focus-ring: rgba(251, 191, 36, 0.35);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-size: 16px; /* Base size for rem calculations */
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6; /* Body copy leading: 1.5-1.65 */
+  font-feature-settings: "kern" 1, "liga" 1; /* Enable kerning and ligatures */
+}
+
+/* ── Typography: Heading Hierarchy (Inverse Scale Rule) ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.2;
+  text-wrap: balance; /* Prevent orphaned words in headings */
+}
+
+h1 {
+  font-size: clamp(2.25rem, 5vw + 1rem, 4.5rem); /* Fluid: 36px → 72px */
+  line-height: 1.05; /* Display leading: 0.9-1.05 */
+  letter-spacing: -0.025em; /* Tight tracking for large display */
+}
+
+h2 {
+  font-size: clamp(1.875rem, 4vw + 0.5rem, 3.75rem); /* Fluid: 30px → 60px */
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw + 0.25rem, 2.25rem); /* Fluid: 24px → 36px */
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+h4 {
+  font-size: var(--text-xl); /* 20px */
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+h5 {
+  font-size: var(--text-lg); /* 18px */
+  line-height: 1.4;
+}
+
+h6 {
+  font-size: var(--text-base); /* 16px */
+  line-height: 1.5;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em; /* Positive tracking for small caps */
+}
+
+/* ── Typography: Body Text & Prose ── */
+p {
+  line-height: 1.6; /* Body leading: 1.5-1.65 */
+  text-wrap: pretty; /* Prevent orphaned words */
+  max-width: 65ch; /* Optimal measure: 60-70 characters */
+}
+
+/* ── Typography: Small Text & Labels ── */
+small, .text-caption {
+  font-size: var(--text-sm); /* 14px */
+  line-height: 1.4;
+}
+
+.text-xs, .text-label {
+  font-size: var(--text-xs); /* 12px */
+  line-height: 1.4;
+  letter-spacing: 0.02em; /* Slight tracking for small text */
+}
+
+/* ── Typography: Links ── */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+/* ── Typography: Strong & Emphasis ── */
+strong, b {
+  font-weight: 600;
+}
+
+em, i {
+  font-style: italic;
+}
+
+/* ── Typography: Code & Monospace ── */
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.875em; /* Relative to parent */
+}
+
+code {
+  padding: 0.125em 0.375em;
+  background-color: var(--bg-muted);
+  border-radius: 0.25em;
+}
+
+pre {
+  padding: 1rem;
+  background-color: var(--bg-muted);
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+/* ── Typography: Lists ── */
+ul, ol {
+  padding-left: 1.5rem;
+  line-height: 1.6;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* ── Typography: Blockquotes ── */
+blockquote {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  line-height: 1.5;
+  font-style: italic;
+  padding-left: 1.5rem;
+  border-left: 3px solid var(--accent);
+  margin: 2rem 0;
+  color: var(--text-secondary);
+}
+
+/* ── Typography: Horizontal Rule ── */
+hr {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: 2rem 0;
+}
+
+/* ── iOS Safari Auto-Zoom Prevention ── */
+input, select, textarea {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  input, select, textarea {
+    font-size: 14px;
+  }
+}
+
+/* ── Accessible Focus Rings (Double Ring) ── */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--focus-ring);
+}
+
+/* ── Tabular Numerics for Prices ── */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Motion Safety ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Skeleton Shimmer ── */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOTION SYSTEM — Animation Tokens (Framer Motion handles the rest)
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Easing Curves */
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-in-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-bounce-settle: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* Duration Tokens */
+  --duration-instant: 80ms;
+  --duration-fast: 150ms;
+  --duration-normal: 280ms;
+  --duration-slow: 400ms;
+  --duration-cinematic: 800ms;
+}
+
+/* ── Marquee Animation (CSS-based, no JS needed) ── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Accessibility: Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ── Marquee Scroll ── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-muted);
+  border-radius: var(--radius-sm);
+}
+
+.skeleton::after {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 1.5s infinite;
+  content: '';
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ── Selection ── */
+::selection {
+  background: var(--accent-muted);
+  color: var(--text-primary);
+}
+
+/* ── Container ── */
+.container-page {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 5vw, 3rem);
+}

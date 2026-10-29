@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ember & Bloom — Specialty Coffee Roasters</title>
+    <meta name="description" content="Single-origin and artisan blend specialty coffees, roasted in small batches and shipped within 24 hours. Sourced directly from farms in Ethiopia, Colombia, Kenya, and Indonesia." />
+    <meta name="theme-color" content="#92400e" />
+    <link rel="canonical" href="https://emberandbloom.co" />
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://emberandbloom.co" />
+    <meta property="og:title" content="Ember & Bloom — Specialty Coffee Roasters" />
+    <meta property="og:description" content="Single-origin and artisan blend specialty coffees, roasted in small batches and shipped within 24 hours." />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ember & Bloom — Specialty Coffee Roasters" />
+    <meta name="twitter:description" content="Single-origin and artisan blend specialty coffees, roasted in small batches and shipped within 24 hours." />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "Ember & Bloom",
+      "description": "Specialty coffee roasters sourcing single-origin beans from the world's finest growing regions.",
+      "url": "https://emberandbloom.co",
+      "priceRange": "$$",
+      "servesCuisine": "Coffee",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Coffee Collection",
+        "itemListElement": [
+          {
+            "@type": "Product",
+            "name": "Ethiopian Yirgacheffe",
+            "description": "Single-origin light roast from Ethiopia with blueberry, jasmine, and lemon zest notes.",
+            "offers": {
+              "@type": "Offer",
+              "price": "18.50",
+              "priceCurrency": "USD"
+            }
+          },
+          {
+            "@type": "Product",
+            "name": "Colombian Supremo",
+            "description": "Medium roast single-origin from Colombia with caramel, red apple, and milk chocolate notes.",
+            "offers": {
+              "@type": "Offer",
+              "price": "16.00",
+              "priceCurrency": "USD"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+
+    <style>
+      html, body { margin: 0; padding: 0; width: 100%; height: 100%; }
+      html, html body { background-color: #0c0a09 !important; color: #fafaf9; }
+    </style>
+    <script>
+      (function () {
+        const isInIframe = window.self !== window.top;
+        function applyThemeToDOM(theme) {
+          document.documentElement.classList.remove("light", "dark");
+          document.documentElement.classList.add(theme);
+          document.documentElement.setAttribute("data-theme", theme);
+        }
+        if (isInIframe) {
+          window.addEventListener("message", function (event) {
+            if (event.data && typeof event.data.theme === "string") {
+              const theme = event.data.theme;
+              if (theme === "dark") applyThemeToDOM(theme);
+            }
+          });
+        } else {
+          applyThemeToDOM("dark");
+        }
+      })();
+    </script>
+    <script>
+      (function () {
+        if (window.self === window.top) return;
+        var reported = {};
+        window.addEventListener("error", function (event) {
+          if (!event || !event.message) return;
+          var key = event.message + "|" + (event.filename || "") + "|" + (event.lineno || 0);
+          if (reported[key]) return;
+          reported[key] = true;
+          try {
+            window.parent.postMessage({
+              type: "sandbox-runtime-error",
+              payload: {
+                message: String(event.message).slice(0, 500),
+                filename: event.filename || "",
+                lineno: event.lineno || 0,
+                colno: event.colno || 0,
+                stack: event.error && event.error.stack ? String(event.error.stack).slice(0, 2000) : ""
+              }
+            }, "*");
+          } catch (e) {}
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
